@@ -1,0 +1,20 @@
+<div class="favorites-container">
+    <h2>Your Favorite Listings</h2>
+    
+    <div class="favorites-list" *ngIf="favoriteListings.length > 0; else noFavorites">
+      <app-listing-card
+        *ngFor="let listing of favoriteListings"
+        [listing]="listing"
+        [isFavorite]="true"
+        [showFavoriteButton]="true"
+        (favoriteToggled)="toggleFavorite(listing.id)"
+      ></app-listing-card>
+    </div>
+    
+    <ng-template #noFavorites>
+      <div class="no-favorites">
+        <p>You haven't added any listings to favorites yet.</p>
+        <a routerLink="/listings" class="btn">Browse Listings</a>
+      </div>
+    </ng-template>
+  </div>

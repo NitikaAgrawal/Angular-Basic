@@ -1,0 +1,24 @@
+<div class="profile-container">
+    <h2>User Profile</h2>
+    
+    <div class="profile-details" *ngIf="user">
+      <div class="detail">
+        <span class="label">Name:</span>
+        <span class="value">{{ user.name }}</span>
+      </div>
+      
+      <div class="detail">
+        <span class="label">Email:</span>
+        <span class="value">{{ user.email }}</span>
+      </div>
+      
+      <div class="detail">
+        <span class="label">Account Type:</span>
+        <span class="value">{{ user.isLandlord ? 'Landlord' : 'Renter' }}</span>
+      </div>
+    </div>
+    
+    <div class="profile-actions">
+      <button routerLink="/listings" class="btn btn-primary">Back to Listings</button>
+    </div>
+  </div>

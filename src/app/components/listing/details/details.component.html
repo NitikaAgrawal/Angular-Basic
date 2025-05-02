@@ -1,0 +1,65 @@
+<div class="listing-details-container" *ngIf="listing">
+    <div class="back-button">
+      <button (click)="router.navigate(['/listings'])" class="btn btn-secondary">Back to Listings</button>
+    </div>
+  
+    <div class="listing-header">
+      <h2>{{ listing.title }}</h2>
+      <div class="price">{{ listing.price | currency }}/month</div>
+    </div>
+  
+    <div class="listing-images">
+      <img *ngFor="let photo of listing.photos" [src]="photo" [alt]="listing.title">
+    </div>
+  
+    <div class="listing-info">
+      <div class="info-section">
+        <h3>Property Details</h3>
+        <p><strong>Address:</strong> {{ listing.address }}</p>
+        <p><strong>Square Feet:</strong> {{ listing.squareFeet }} sq.ft</p>
+        <p><strong>Property Type:</strong> {{ listing.propertyType }}</p>
+        <p><strong>Lease Type:</strong> {{ listing.leaseType }}</p>
+        <p><strong>Furnished:</strong> {{ listing.isFurnished ? 'Yes' : 'No' }}</p>
+        <p><strong>Shared:</strong> {{ listing.isShared ? 'Yes' : 'No' }}</p>
+      </div>
+  
+      <div class="info-section">
+        <h3>Amenities</h3>
+        <div class="amenities">
+          <span *ngFor="let amenity of listing.amenities" class="amenity-tag">
+            {{ amenity }}
+          </span>
+        </div>
+      </div>
+  
+      <div class="info-section">
+        <h3>Description</h3>
+        <p>{{ listing.description }}</p>
+      </div>
+    </div>
+  
+    <div class="comments-section">
+      <h3>Comments</h3>
+      
+      <div *ngIf="listing.comments.length === 0" class="no-comments">
+        No comments yet. Be the first to comment!
+      </div>
+  
+      <div *ngFor="let comment of listing.comments" class="comment">
+        <div class="comment-header">
+          <strong>{{ comment.userName }}</strong>
+          <span class="comment-date">{{ comment.createdAt | date:'medium' }}</span>
+        </div>
+        <div class="comment-content">{{ comment.content }}</div>
+      </div>
+  
+      <div *ngIf="isAuthenticated()" class="add-comment">
+        <h4>Add a Comment</h4>
+        <textarea [(ngModel)]="newComment" placeholder="Write your comment here..." rows="3"></textarea>
+        <button (click)="addComment()" class="btn btn-primary" [disabled]="!newComment.trim()" style="background-color: #1a9df4;">Post Comment</button>
+      </div>
+      <div *ngIf="!isAuthenticated()" class="login-prompt">
+        Please <a routerLink="/login">login</a> to post a comment.
+      </div>
+    </div>
+  </div>

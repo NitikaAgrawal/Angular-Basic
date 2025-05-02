@@ -1,0 +1,30 @@
+<div class="listing-card">
+    <div class="card-image">
+      <img [src]="getImageUrl()" [alt]="listing.title">
+    </div>
+    
+    <div class="card-content">
+      <h3>
+        <a [routerLink]="['/listings', listing.id]">{{ listing.title }}</a>
+      </h3>
+      
+      <div class="price">{{ listing.price | currency }}/month</div>
+      
+      <div class="address">{{ listing.address }}</div>
+      
+      <div class="amenities">
+        <span *ngFor="let amenity of listing.amenities" class="amenity-tag">
+          {{ amenity }}
+        </span>
+      </div>
+      
+      <div class="description">{{ listing.description | truncate:100 }}</div>
+      
+      <div class="card-actions" *ngIf="showFavoriteButton">
+        <button (click)="toggleFavorite()" class="favorite-button">
+          {{ isFavorite ? '❤️ Remove Favorite' : '♡ Add Favorite' }}
+        </button>
+        <a [routerLink]="['/listings', listing.id]" class="view-details">View Details</a>
+      </div>
+    </div>
+  </div>

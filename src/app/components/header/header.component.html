@@ -1,0 +1,15 @@
+ <header class="header">
+    <div class="container">
+      <h1 class="logo">RentHub</h1>
+      
+      <nav class="nav">
+        <a routerLink="/favorites" class="nav-link">Favorites</a>
+        <a routerLink="/profile" class="nav-link" *ngIf="currentUser">Profile</a>
+      </nav>
+      
+      <div class="user-profile" *ngIf="currentUser">
+        <span class="username">{{ currentUser.name }}</span>
+        <button (click)="logout()" class="logout-button">Logout</button>
+      </div>
+    </div>
+  </header>

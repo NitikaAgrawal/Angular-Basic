@@ -1,0 +1,482 @@
+import { Injectable } from '@angular/core';
+import { Listing,Comment } from '../interfaces/listing';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ListingService {
+  private listings: Listing[] = [
+    {
+      id: 1,
+      title: 'Luxury Apartment',
+      description: 'An apartment, flat, tenement, or unit is a self-contained housing unit that occupies part of a building, generally on a single story..',
+      price: 1200,
+      address: '123 Main St, City',
+      squareFeet: 1200,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: false,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: [ 'Swimming Pool','Car park'],
+      photos: ['assets/sample1.jpeg'],
+      userId: 1,
+      propertyType: 'Apartment',
+      propertyName: 'Luxury Heights',
+      comments: [
+        { id: 1, userId: 1, userName: 'Admin', content: 'This is a great place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Uptown Apartment',
+      description: 'A well-crafted rental description can make a significant difference in attracting potential tenants.',
+      price: 1500,
+      address: 'Street road, Bangalore',
+      squareFeet: 1000,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Car park','Elevator'],
+      photos: ['assets/sample2.jpeg'],
+      userId: 2,
+      propertyType: 'Apartment',
+      propertyName: 'Uptown Residency',
+      comments: [
+        { id: 2, userId: 2, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 3,
+      title: 'Modern Apartment',
+      description: 'The apartment has a floor space of 60 square meters and it\'s located on the first floor, and in it you will find a spacious living room with a stylish sitting area with smart TV with Netflix included, fully equipped kitchen and a dining.',
+      price: 2000,
+      address: 'DLF road, Gurgaon',
+      squareFeet: 1500,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: false,
+      priceMode: 'Utilities included in rent',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Laundry service'],
+      photos: ['assets/sample3.jpeg'],
+      userId: 3,
+      propertyType: 'Apartment',
+      propertyName: 'Modern Living',
+      comments: [
+        { id: 3, userId: 3, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 4,
+      title: 'Cozy studio',
+      description: 'This exclusive apartment is located in an interesting building at the ground floor. With an area of 38 square meters when you come in, you find yourself in a spacious royal studio equipped with nice comfortable sofa bed, royal king size bed, flat screen TV and wardrobe, luxury comfort dinning table for 4 persons and fully equipped kitchen.',
+      price: 15000,
+      address: 'A Dot GNH, Delhi',
+      squareFeet: 800,
+      isShared: true,
+      leaseType: 'Short term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool'],
+      photos: ['assets/sample4.jpeg'],
+      userId: 4,
+      propertyType: 'Studio',
+      propertyName: 'Cozy Corner',
+      comments: [
+        { id: 4, userId: 4, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 5,
+      title: 'Multifamily Apartment',
+      description: 'The apartment is suitable for a couples or for a single travelers. It is very cozy and comfortable space, fully designed and furnished',
+      price: 5000,
+      address: 'Bargi hills, Jabalpur',
+      squareFeet: 2000,
+      isShared: false,
+      leaseType: 'Both',
+      isPriceNegotiable: false,
+      priceMode: 'Utilities included in rent',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Elevator'],
+      photos: ['assets/sample5.jpeg'],
+      userId: 5,
+      propertyType: 'Apartment',
+      propertyName: 'Family Haven',
+      comments: [
+        { id: 5, userId: 5, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 6,
+      title: 'Oldage Apartment',
+      description: 'The apartment consists of a large bright bedroom with a comfy king-sized bed, a modern fully-equipped kitchen and a sunlit living room with Apple TV and free Netflix account.',
+      price: 4500,
+      address: 'Vijaynagar, Indore',
+      squareFeet: 1800,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Car Park'],
+      photos: ['assets/sample6.jpeg'],
+      userId: 6,
+      propertyType: 'Apartment',
+      propertyName: 'Golden Years',
+      comments: [
+        { id: 6, userId: 6, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 7,
+      title: 'Peace apartments',
+      description: ' Make yourself at home in our cosy, modern apartment in the picturesque (CN) right at the foot of the romantic ___ hill and within walking distance from all major sights.',
+      price: 6999,
+      address: 'Viman Nagar, Pune',
+      squareFeet: 2500,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Elevator','Car Park'],
+      photos: ['assets/sample7.jpeg'],
+      userId: 7,
+      propertyType: 'Apartment',
+      propertyName: 'Peace corner',
+      comments: [
+        { id: 7, userId: 7, userName: 'Admin', content: 'Best in terms of cleanliness, Services', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 8,
+      title: 'Apartment Partners',
+      description: 'This romantic apartment is perfectly suited for business trip, couple or couple with children. Located in the strong central area includes a cozy studio equiped with nice sofa and queen bed, also there is fully equiped kitchen. ',
+      price: 3500,
+      address: 'MangalDas road, Pune',
+      squareFeet: 1500,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Swimming Pool','Car Park'],
+      photos: ['assets/sample8.jpeg'],
+      userId: 8,
+      propertyType: 'Apartment',
+      propertyName: 'Partners home',
+      comments: [
+        { id: 8, userId: 8, userName: 'Admin', content: 'This is a Wonderful place to stay!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 9,
+      title: 'Seaview Apartments',
+      description: '. This newly renovated, fully furnished studio features a bedroom with a queen bed and sofa-bed on the upper floor, a spacious and cozy living room with a comfy sofa-bed facing a TV with Netflix on a first floor, a small work table, a dining table, a spacious bathroom with a bathtub and a brand new fully-equipped kitchen. A wall safe and luggage holder also available.',
+      price: 15000,
+      address: 'Near Kokilaben hospital, Mumbai',
+      squareFeet: 3000,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater','Private Lawn','Laundry Service','Elevator','Car Park'],
+      photos: ['assets/sample9.jpeg'],
+      userId: 9,
+      propertyType: 'Apartment',
+      propertyName: 'Seaview heaven',
+      comments: [
+        { id: 9, userId: 9, userName: 'Admin', content: 'Best place to stay with family, friends!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 10,
+      title: 'MiniPalais',
+      description: 'The two bedrooms apartment with kitchen and bathroom in old gallery house just in the (CN´s) Old Town is in very quiet street with private yard.',
+      price: 4550,
+      address: 'Vijaynagar, Jabalpur',
+      squareFeet: 1400,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Car Park'],
+      photos: ['assets/sample10.jpeg'],
+      userId: 10,
+      propertyType: 'Palace',
+      propertyName: 'Mini version ',
+      comments: [
+        { id: 10, userId: 10, userName: 'Admin', content: 'Best in terms of Services and cleanliness!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 11,
+      title: 'Town Place Apartments',
+      description: 'Beautiful two bedroom Old Town apartment with magnificent views with spacious terrace and fully equipped kitchen and two bathrooms. ',
+      price: 12000,
+      address: 'Gandhi Nagar, Nagpur',
+      squareFeet: 2100,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater','Private Lawn','Laundry Service','Elevator','Car Park'],
+      photos: ['assets/sample11.jpeg'],
+      userId: 11,
+      propertyType: 'Apartment',
+      propertyName: 'Town feelzz',
+      comments: [
+        { id: 11, userId: 11, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 12,
+      title: 'Paradise Palms',
+      description: 'Discover a mix of modernity and history in this characteristic (CN) flat. The space features wood finishes, subtle uses of color, an open layout living area and kitchen, a cozy master bedroom, second bedroom and rooftop views.',
+      price: 9000,
+      address: 'Motera, Ahmedabad',
+      squareFeet: 2400,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater','Private Lawn','Elevator','Car Park'],
+      photos: ['assets/sample12.jpeg'],
+      userId: 12,
+      propertyType: 'Apartment',
+      propertyName: 'Paradise feelz',
+      comments: [
+        { id: 12, userId: 12, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 13,
+      title: 'Darling Building',
+      description: 'This iconic high rise building in the heart of Beverly Hills offers an exquisite two bedroom apartment with unparalleled views of Los Angeles. ',
+      price: 8500,
+      address: 'Shastri Nagar, Rajasthan',
+      squareFeet: 1950,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Water Heater','Elevator','Car Park'],
+      photos: ['assets/sample13.jpeg'],
+      userId: 13,
+      propertyType: 'Apartment',
+      propertyName: 'Loving apartment',
+      comments: [
+        { id: 13, userId: 13, userName: 'Admin', content: 'Best in', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 14,
+      title: 'Lilli Midtown Flats',
+      description: 'Situated in the chic Hell’s Kitchen neighborhood, this two-bedroom apartment offers a modern lifestyle with classic urban touches. It has an open floor plan with bright natural lighting, an upgraded kitchen with stainless steel appliances, and wide-plank wood floors throughout. The bedrooms have generous closets and plenty of windows providing gorgeous city views.',
+      price: 11000,
+      address: 'Vijaynagar, Indore',
+      squareFeet: 1800,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater','Private Lawn','Laundry Service','Elevator','Car Park'],
+      photos: ['assets/sample14.jpeg'],
+      userId: 14,
+      propertyType: 'Flats',
+      propertyName: 'MidTown corner',
+      comments: [
+        { id: 14, userId: 14, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 15,
+      title: 'Timber Ridge Apartments',
+      description: 'Located in the heart of Midtown Baltimore, this two bedroom apartment offers a luxurious lifestyle.',
+      price: 4999,
+      address: 'Pink City, Jaipur',
+      squareFeet: 1600,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: [ 'Swimming Pool','Water Heater'],
+      photos: ['assets/sample15.jpeg'],
+      userId: 15,
+      propertyType: 'Apartment',
+      propertyName: 'Timber stay',
+      comments: [
+        { id: 15, userId: 15, userName: 'Admin', content: 'Best in terms of services,Cleanliness,quality staff and food', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 16,
+      title: 'WinterSpring Rental',
+      description: 'Stylishly appointed near the historic Brookside neighborhood, this one bedroom apartment offers modern amenities and an unbeatable location.',
+      price: 10000,
+      address: 'DLF phase 2, Noida',
+      squareFeet: 3500,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater','Private Lawn','Laundry Service'],
+      photos: ['assets/sample16.jpeg'],
+      userId: 16,
+      propertyType: 'Apartment',
+      propertyName: 'WinterSpring corner',
+      comments: [
+        { id: 16, userId: 16, userName: 'Admin', content: 'This is a beautiful place!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 17,
+      title: 'City Dwellers',
+      description: 'he interior features designer finishes including a high-end kitchen with stainless steel appliances, clean lines, custom cabinetry and granite countertops. ',
+      price: 5500,
+      address: 'SitaVardi, Nagpur',
+      squareFeet: 1000,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Swimming Pool','Power backup','Water Heater'],
+      photos: ['assets/sample17.jpeg'],
+      userId: 17,
+      propertyType: 'Apartment',
+      propertyName: 'City love',
+      comments: [
+        { id: 17, userId: 17, userName: 'Admin', content: 'This is the coolest place to stay!', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 18,
+      title: 'One Eighties Residences',
+      description: 'Newly renovated design apartment with a romantic garden terrace situated in one of the (CN’s) most popular and coolest neighborhood. ',
+      price: 6000,
+      address: 'Magarpatta, Pune',
+      squareFeet: 1900,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Power backup','Garbage Disposal','Water Heater'],
+      photos: ['assets/sample18.jpeg'],
+      userId: 18,
+      propertyType: 'Apartment',
+      propertyName: 'Golden Years',
+      comments: [
+        { id: 18, userId: 18, userName: 'Admin', content: 'This is a best place to stay with families', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 19,
+      title: 'Stanley Park Apartments',
+      description: 'This Old Town apartment with air conditioning and free parking features bedroom with king size bed and Netflix, comfortable living room with smart TV and Netflix, full equipped kitchen with coffee machine and balcony, bathroom with rain shower, bath-tube and unlimited hot water. ',
+      price: 8500,
+      address: 'Hinjewadi, Pune',
+      squareFeet: 1800,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool','Car park','Club House', 'Elevator','Water heater'],
+      photos: ['assets/sample19.jpeg'],
+      userId: 19,
+      propertyType: 'Apartment',
+      propertyName: 'Park corner',
+      comments: [
+        { id: 19, userId: 19, userName: 'Admin', content: 'This is the best place to stay with family, friends! ', createdAt: new Date() }
+      ]
+    },
+    {
+      id: 20,
+      title: 'Homely Villas',
+      description: 'This Apartment is designed in a Modern and Practical elements which provides maximum comfort and the best experience during your visit in (CN).',
+      price: 7000,
+      address: 'Electronic City, Banglore',
+      squareFeet: 2700,
+      isShared: false,
+      leaseType: 'Long term',
+      isPriceNegotiable: true,
+      priceMode: 'Per Month',
+      isFurnished: true,
+      amenities: ['Gym', 'Swimming Pool'],
+      photos: ['assets/sample20.jpeg'],
+      userId: 20,
+      propertyType: 'Villa',
+      propertyName: 'Royal feel',
+      comments: [
+        { id: 20, userId: 20, userName: 'Admin', content: 'This is a wonderful place to stay!', createdAt: new Date() }
+      ]
+    }
+  ];
+
+  private favorites: number[] = [];
+
+  getListings(): Listing[] {
+    return this.listings;
+  }
+
+  getListingById(id: number): Listing | undefined {
+    return this.listings.find(listing => listing.id === id);
+  }
+
+  addListing(listingData: Omit<Listing, 'id' | 'comments'>): Listing {
+    const newListing: Listing = {
+      ...listingData,
+      id: this.generateId(),
+      comments: []
+    };
+    
+    this.listings.push(newListing);
+    return newListing;
+  }
+
+  private generateId(): number {
+    return this.listings.length > 0 
+      ? Math.max(...this.listings.map(l => l.id)) + 1 
+      : 1;
+  }
+
+  addComment(listingId: number, comment: Omit<Comment, 'id' | 'createdAt'>): void {
+    const listing = this.listings.find(l => l.id === listingId);
+    if (listing) {
+      const newComment = {
+        ...comment,
+        id: listing.comments.length + 1,
+        createdAt: new Date()
+      };
+      listing.comments.push(newComment);
+    }
+  }
+
+  toggleFavorite(listingId: number): void {
+    const index = this.favorites.indexOf(listingId);
+    if (index === -1) {
+      this.favorites.push(listingId);
+    } else {
+      this.favorites.splice(index, 1);
+    }
+  }
+
+  isFavorite(listingId: number): boolean {
+    return this.favorites.includes(listingId);
+  }
+}

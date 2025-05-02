@@ -1,0 +1,24 @@
+<div class="listing-container">
+  <app-header></app-header>
+  
+  <div class="listing-actions">
+    <button routerLink="/create-listing" class="create-button">Create New Post</button>
+  </div>
+  
+  <div class="listing-list" *ngIf="listings.length > 0; else noListings">
+    <app-listing-card
+      *ngFor="let listing of listings"
+      [listing]="listing"
+      [isFavorite]="isFavorite(listing.id)"
+      [showFavoriteButton]="isAuthenticated"
+      (favoriteToggled)="toggleFavorite(listing.id)"
+    ></app-listing-card>
+  </div>
+  
+  <ng-template #noListings>
+    <div class="no-listings">
+      <p>No posts available. Be the first to create one!</p>
+    </div>
+  </ng-template>
+</div> 
+
